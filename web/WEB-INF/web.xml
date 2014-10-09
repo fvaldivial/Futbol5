@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>Servlet_RegistrarUsuario</servlet-name>
+        <servlet-class>pe.edu.servlets.Servlet_RegistrarUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_login</servlet-name>
+        <servlet-class>pe.edu.servlets.Servlet_login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_Inspart</servlet-name>
+        <servlet-class>pe.edu.servlets.Servlet_Inspart</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Servlet_RegistrarUsuario</servlet-name>
+        <url-pattern>/Servlet_RegistrarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_login</servlet-name>
+        <url-pattern>/Servlet_login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_Inspart</servlet-name>
+        <url-pattern>/Servlet_Inspart</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index_1.html</welcome-file>
+    </welcome-file-list>
+</web-app>
