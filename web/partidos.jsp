@@ -1,30 +1,30 @@
 <%-- 
-    Document   : partidos
-    Created on : 16/09/2014, 02:12:54 PM
+    Document   : index
+    Created on : 08/09/2014, 01:40:43 PM
     Author     : GooMoonRyong
 --%>
 
-<%@page import="pe.edu.bean.UsuarioBean"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-   <head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <link href="cssbosti/bootstrap.min.css" rel="stylesheet">
 
         <link href="css/mine.css" rel="stylesheet">
 
-        <%UsuarioBean usu = (UsuarioBean) request.getAttribute("usuario");%>
+        <%List partidos = (List) request.getAttribute("partidos");%>
+        <%String usuario = (String) request.getAttribute("usuario");%>
 
         <%---  ---%>
 
-        <% String[] b = usu.getPartidos();%>
 
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-        <title> Pagina de <%= usu.getNombre()%> </title>
+        <title> Pagina de <%= usuario%> </title>
     </head>
     <body>
 
@@ -36,17 +36,17 @@
                         <div class="panel-heading">
                             
                             <ul class="nav nav-tabs">
-                                <% request.setAttribute("usuario", usu); %>
                                 <li class="active"><a href="#tab1info" data-toggle="tab">Editar perfil</a></li>
-                                <li><a href="index_1.html" >Salir</a></li>
-                                <li><a href="#tab3info" data-toggle="tab">vere</a></li>
+                                
+                                <li><a href="#tab3info" data-toggle="tab">no tocar</a></li>
                                 <li class="dropdown">
                                     <a href="#" data-toggle="dropdown">Inscripcion<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="Servlet_Inspart?nombre=<%=usu.getNombre()%>&tipo=normal"  >Forma normal</a></li>
-                                        <li><a href="#tab5info" data-toggle="tab">Forma solidaria</a></li>
+                                        
+                                        
                                     </ul>
                                 </li>
+                                <li><a href="index.html" >Salir</a></li>
                             </ul>
                             
                             </span>
@@ -65,7 +65,7 @@
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><%= usu.getNombre()%></h3>
+                        <h3 class="panel-title"><%= usuario %></h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -76,17 +76,6 @@
                                 <table class="table table-user-information">
                                     <tbody>
                                         
-                                        <% for (int i = 0; i < b.length; i++) {%>
-
-                                        <tr>
-                                            <td>partido <%= i%> : </td>
-                                            <td>codigo sera <%= b[i]%></td>
-                                        </tr>
-
-                                        <%}%>
-
-                                        
-
                                     </tbody>
                                 </table>
 

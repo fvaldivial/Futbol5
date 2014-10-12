@@ -87,7 +87,7 @@ public class LoginServlet extends HttpServlet {
              request.setAttribute("usuario", u);
 
             System.out.println(u.getDni());
-            System.out.println(u.getNombre());
+            System.out.println(u.getUsuario());
             System.out.println(u.getTelefono());
             
             

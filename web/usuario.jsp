@@ -42,7 +42,7 @@
                                 <li class="dropdown">
                                     <a href="#" data-toggle="dropdown">Inscripcion<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="Servlet_Inspart?nombre=<%=usu.getNombre()%>&tipo=normal"  >Forma normal</a></li>
+                                        <li><a href="InscServlet?usuario=<%=usu.getUsuario()%>"  >Forma normal</a></li>
                                         <li><a href="#tab5info" data-toggle="tab">Forma solidaria</a></li>
                                     </ul>
                                 </li>
