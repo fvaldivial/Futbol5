@@ -11,16 +11,21 @@ public class UsuarioBean implements Serializable{
     private String email;
     private String nombre;
     private String telefono;
+    private String usuario;
+    private String direccion;
     private String[] partidos;
 
     public UsuarioBean(){}
     
-    public UsuarioBean(String dni, String email, String nombre, String telefono, String[] partidos) {
+    public UsuarioBean(String dni, String email, String nombre, String telefono, String usuario, String direccion, String[] partidos) {
         this.dni = dni;
         this.email = email;
         this.nombre = nombre;
         this.telefono = telefono;
         this.partidos = partidos;
+        this.usuario = usuario;
+        this.direccion = direccion;
+        
     }
     
     public UsuarioBean(String dni, String email, String nombre, String telefono) {
@@ -68,6 +73,22 @@ public class UsuarioBean implements Serializable{
 
     public void setPartidos(String[] partidos) {
         this.partidos = partidos;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
     
     
