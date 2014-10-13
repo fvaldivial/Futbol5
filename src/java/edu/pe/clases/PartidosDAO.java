@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package edu.pe.clases;
+//LOLOLOLOLL
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
