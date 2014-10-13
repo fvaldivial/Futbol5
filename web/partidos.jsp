@@ -63,31 +63,17 @@
                                                 <input type="text" class="form-control" placeholder="dd/mm/aa">
                                            </div> 
 
-                                        <script>
-                                        $(function(){
-
-                                            $(".dropdown-menu").on('click', 'li a', function(){
-                                              $(".btn:first-child").text($(this).text());
-                                              $(".btn:first-child").val($(this).text());
-                                           });
-
-                                        });
-                                        </script>
                                             
                                             <h4>Cancha</h4>
-                                           <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                                              Canchas disponibles
-                                              <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                            
                                                 <% for(int i=0; i<l.size(); i++){
                                                     CanchaBean c = new CanchaBean();
                                                     c = (CanchaBean) l.get(i); %>
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" name="cancha" id="cancha" value="<%= c.getId() %>"><%= c.getId()%></a></li>
+                                                    
+                                                    <input type="radio" name="canchas" id="canchas" value="<%= c.getId() %>" checked>
+                                                        <%= c.getId() %>
+                                                        <br>
                                                 <% } %>
-                                            </ul>
-                                           </div>
 
                                             <h4>Turno</h4>
                                             <div class="radio">
@@ -104,28 +90,6 @@
                                                   Noche
                                                 </label>
                                             </div>
-
-                                            <h4>Tipo de pago</h4>
-                                            <div class="radio">
-                                                <label>
-                                                  <input type="radio" name="pagos" id="pagos" value="pago1" checked>
-                                                  Tarjeta de crédito
-                                                </label>
-                                                <label>
-                                                  <input type="radio" name="pagos" id="pagos" value="pago2" >
-                                                  Tarjeta de débito
-                                                </label>                                            
-                                                <label>
-                                                  <input type="radio" name="pagos" id="pagos" value="pago3" >
-                                                  Voucher
-                                                </label>
-                                            </div>
-                                            
-                                            <h5>Número de tarjeta/voucher</h5>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="">
-                                            </div>   
-
                                         </tbody>
                                     </table>
                                     
