@@ -14,6 +14,7 @@ public class PartidoBean  implements Serializable{
     public String fechai;
     public String fechap;
     public int pago; //si pago 1, si no pago 0
+    public int idpago;
     public int cont; //contador de dias
 
     public PartidoBean(String id, String cancha, int admin, int[] jugadores, int turno, String fechai, String fechap, int pago, int cont) {
@@ -31,8 +32,6 @@ public class PartidoBean  implements Serializable{
     public PartidoBean() {
     }
 
-    
-    
     
     public String getId() {
         return id;

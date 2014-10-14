@@ -60,4 +60,24 @@ public class PartidosDAO implements PartidosIF {
 
         return l;
     }
+    public void crearPartido(PartidoBean pb) throws UnknownHostException{
+        inicializar();
+        
+        
+        
+    }
+    
+    public void listarPartidos(){
+        
+    }
+    
+    public void listarPartidosXUsuario(){
+        
+    }
+    
+    public void cancelarPartido(){
+        
+    }
+        
+        
 }

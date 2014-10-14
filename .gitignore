@@ -1,2 +1,4 @@
 /nbproject/private/
 /build/
+*.properties
+nbproject/build-impl.xml~
