@@ -3,10 +3,10 @@
  * and open the template in the editor.
  */
 package edu.pe.clases;
-//LOLOLOLOLL
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
@@ -16,10 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.bean.PartidoBean;
 
-/**
- *
- * @author GooMoonRyong
- */
 public class PartidosDAO implements PartidosIF {
 
     MongoClient mc = null;
@@ -40,7 +36,6 @@ public class PartidosDAO implements PartidosIF {
         PartidoBean p = null;
         int nump = 0;
 
-
         try {
             //conexion con base de datos
             inicializar();
@@ -50,34 +45,42 @@ public class PartidosDAO implements PartidosIF {
         }
 
         //poner los datos a cada partidoBean
-        
-        
         //poner un contador para saber cuantos partidos hay
         for (int i = 0; i <= nump; i++) {
             l.add(p);
         }
 
-
         return l;
     }
-    public void crearPartido(PartidoBean pb) throws UnknownHostException{
+
+    public void crearPartido(PartidoBean pb) throws UnknownHostException {
         inicializar();
         
-        
-        
+
     }
-    
-    public void listarPartidos(){
-        
+
+    public void listarPartidos() throws UnknownHostException {
+        inicializar();
+
+        DBCursor cursor = usuarios.find();
+        try {
+            while (cursor.hasNext()) {
+                System.out.println(cursor.next());
+            }
+        } finally {
+            cursor.close();
+        }
+
     }
-    
-    public void listarPartidosXUsuario(){
-        
+
+    public void listarPartidosXUsuario() throws UnknownHostException {
+        inicializar();
+
     }
-    
-    public void cancelarPartido(){
-        
+
+    public void cancelarPartido() throws UnknownHostException {
+        inicializar();
+
     }
-        
-        
+
 }
