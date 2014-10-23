@@ -20,7 +20,9 @@
 
         <%List p = (List) request.getAttribute("partidos");%>
         <%String usuario = (String) request.getAttribute("usuario");%>
-        <%List l = new ArrayList(); %>
+        <%List l = p; %>
+        
+        
         <%
         for(int i=0; i<5; i++){
             PartidoBean p2 = new PartidoBean();
@@ -29,10 +31,12 @@
             p2.setCancha("tu jato");
             l.add(p2);            
         }%>
+        
+        <%--
         <% PartidoBean b = new PartidoBean();
         b = (PartidoBean) l.get(1); 
         %>
-
+        --%>
         <%---  ---%>
 
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -54,7 +58,7 @@
                     
                     <div class="panel-heading">
                         <h3 class="panel-title"><%= "Lista de partidos" %></h3>
-                        <h4 class="panel-title"><%= "usuario1" %></h4>
+                        <h4 class="panel-title"><%= usuario %></h4>
                     </div>
                     
                     <div class="panel-body">

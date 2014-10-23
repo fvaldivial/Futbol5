@@ -55,6 +55,7 @@
 
                             <div class=" col-md-9 col-lg-9 "> 
                                 <form method="post" action="PartidoServlet">
+                                    <input type="text" value="<%=usuario%>" name="usuario" hidden="on" >
                                     <table class="table table-user-information">
                                         <tbody>
                                             
