@@ -4,6 +4,7 @@
  */
 package edu.pe.clases;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -15,18 +16,19 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pe.edu.bean.PartidoBean;
+import pe.edu.bean.UsuarioBean;
 
 public class PartidosDAO implements PartidosIF {
 
     MongoClient mc = null;
     DB DB = null;
-    DBCollection usuarios = null;
+    DBCollection partidos = null;
 
     private void inicializar() throws UnknownHostException {
 
         mc = new MongoClient("localhost", 27017);
         DB = mc.getDB("futbol5");
-        usuarios = DB.getCollection("users");
+        partidos = DB.getCollection("partidos");
         //System.out.println("okokokk");
     }
 
@@ -55,31 +57,83 @@ public class PartidosDAO implements PartidosIF {
 
     public void crearPartido(PartidoBean pb) throws UnknownHostException {
         inicializar();
-        
-
+        BasicDBObject partido = new BasicDBObject();
+        //verificar si la lista de jugadores se inserta correctamente
+        partido.append("cancha", pb.getCancha()).append("admin", pb.getAdmin()).append("jugadores", pb.getJugadores()).append("turno", pb.getTurno()).append("fechai", pb.getFechai()).append("pago", pb.getPago());
+        partidos.insert(partido);
     }
 
-    public void listarPartidos() throws UnknownHostException {
+    public List listarPartidos() throws UnknownHostException {
         inicializar();
 
-        DBCursor cursor = usuarios.find();
+        List<PartidoBean> PB = new ArrayList<PartidoBean>();
+
+        DBCursor cursor = partidos.find();
         try {
             while (cursor.hasNext()) {
-                System.out.println(cursor.next());
+                DBObject partido = new BasicDBObject();
+                partido = cursor.next();
+                PartidoBean u = new PartidoBean();
+                u.setAdmin(Integer.parseInt((String) partido.get("admin")));
+                u.setCancha((String) partido.get("cancha"));
+                u.setCont(Integer.parseInt((String) partido.get("cont")));
+                u.setFechai((String) partido.get("fechai"));
+                u.setFechap((String) partido.get("fechap"));
+                u.setId((String) partido.get("_id"));
+                // Determinar si se necesita el arreglo de jugadores aqui u.setJugadores((String)jugadores);
+                //determinar u.setPago((String)pago);
+                //igual u.setTurno((String)turno);
+                PB.add(u);
+
             }
         } finally {
             cursor.close();
         }
 
-    }
-
-    public void listarPartidosXUsuario() throws UnknownHostException {
-        inicializar();
+        return PB;
 
     }
 
-    public void cancelarPartido() throws UnknownHostException {
+    public List listarPartidosXUsuario(int admin) throws UnknownHostException {
         inicializar();
+
+        List<PartidoBean> PB = new ArrayList<PartidoBean>();
+
+        BasicDBObject query = new BasicDBObject("admin", admin);
+
+        DBCursor cursor = partidos.find(query);
+        try {
+            while (cursor.hasNext()) {
+                DBObject partido = new BasicDBObject();
+                partido = cursor.next();
+                PartidoBean u = new PartidoBean();
+                u.setAdmin(Integer.parseInt((String) partido.get("admin")));
+                u.setCancha((String) partido.get("cancha"));
+                u.setCont(Integer.parseInt((String) partido.get("cont")));
+                u.setFechai((String) partido.get("fechai"));
+                u.setFechap((String) partido.get("fechap"));
+                u.setId((String) partido.get("_id"));
+                // Determinar si se necesita el arreglo de jugadores aqui u.setJugadores((String)jugadores);
+                //determinar u.setPago((String)pago);
+                //igual u.setTurno((String)turno);
+                PB.add(u);
+
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return PB;
+
+    }
+
+    public void cancelarPartido(String id) throws UnknownHostException {
+        //como se va a determinar que partido se cancela? bajo que pk?
+        inicializar();
+        BasicDBObject query = new BasicDBObject();
+	query.put("_id", id);
+	partidos.remove(query);
+        
 
     }
 
