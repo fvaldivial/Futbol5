@@ -45,7 +45,52 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+        //Paso 1: recuperar sesion
+        HttpSession s = request.getSession(true);
+
+        //Paso 2: recuperar datos
+        UsuarioBean u = new UsuarioBean();
+        u.setUsuario(request.getParameter("usuario"));
+        String pass = request.getParameter("password");
+
+        //Paso 3: logica
+               
+        UsuarioIF ui = new UsuarioDAO();
+        DBObject d = ui.getInfo2(u);
+        
+        //Paso 4: pasar datos a la pagina
+        
+        //Paso 5: enviar a la pagina
+
+        
+//        System.out.println(Utilitarios.password(pass,u,d));
+        
+       
+        
+//        if(d != null && pass.equals(d.get("password"))){
+            u.setUsuario((String) d.get("_id"));
+            u.setDni((String) d.get("dni"));
+            u.setEmail((String) d.get("email"));
+            u.setNombre((String) d.get("nombre"));
+            u.setTelefono((String) d.get("telf"));
+            u.setDireccion((String) d.get("direccion"));
+            String[] a = {"1", "2"};
+            u.setPartidos(a);
+            
+             request.setAttribute("usuario", u);
+
+            System.out.println(u.getDni());
+            System.out.println(u.getUsuario());
+            System.out.println(u.getTelefono());
+            
+            
+            RequestDispatcher rd = request.getRequestDispatcher("usuario.jsp");
+            rd.forward(request, response);
+        
+        
+        
+        
     }
 
     

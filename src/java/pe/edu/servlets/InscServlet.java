@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.bean.PartidoBean;
 import pe.edu.bean.UsuarioBean;
 
 /**
@@ -74,7 +75,37 @@ public class InscServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+         HttpSession s = request.getSession(true);
+         
+         PartidosDAO p = new PartidosDAO();
+         
+         PartidoBean p1 = new PartidoBean();
+         
+         System.out.println("lee esto " + request.getParameter("turnos"));
+         
+         p1.setCancha(request.getParameter("canchas"));
+         
+         p1.setFechai(request.getParameter("fecha"));
+         
+         p1.setTurno(Integer.parseInt(request.getParameter("turnos")));
+         
+         p.crearPartido(p1);
+         
+                      
+                
+        
+        List l = p.listarPartidos();
+        
+        request.setAttribute("usuario", request.getParameter("usuario"));
+        System.out.println("este es el usuario " + request.getParameter("usuario"));
+        request.setAttribute("partidos", l);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("listapartidos.jsp");
+        rd.forward(request, response);
+        
+         
+        
     }
 
 }

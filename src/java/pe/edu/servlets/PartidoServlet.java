@@ -48,14 +48,25 @@ public class PartidoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        HttpSession s = request.getSession(true);
+        
+        if(request.getParameter("salir").equals("salir")){
+            
+            RequestDispatcher rd = request.getRequestDispatcher("LoginServlet.java");
+            rd.forward(request, response);
+            
+        }
+        
+        
     }
 
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          HttpSession s = request.getSession(true);
+        
+        HttpSession s = request.getSession(true);
           
         PartidosDAO p = new PartidosDAO();
               
@@ -69,7 +80,6 @@ public class PartidoServlet extends HttpServlet {
         
         RequestDispatcher rd = request.getRequestDispatcher("listapartidos.jsp");
         rd.forward(request, response);
-        
         
     }
 

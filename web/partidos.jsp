@@ -20,12 +20,14 @@
 
         <%List partidos = (List) request.getAttribute("partidos");%>
         <%String usuario = (String) request.getAttribute("usuario");%>
-        <%List l = new ArrayList(); %>
+        <%List l = new ArrayList() ; %>
+        
         <%
         for(int i=0; i<5; i++){
             CanchaBean a = new CanchaBean("nombreCancha", "Local");
             l.add(a);            
         }%>
+        
         <% CanchaBean b = new CanchaBean();
         b = (CanchaBean) l.get(1); 
         %>
@@ -54,14 +56,14 @@
                     <div class="panel-body">
 
                             <div class=" col-md-9 col-lg-9 "> 
-                                <form method="post" action="PartidoServlet">
+                                <form method="post" action="InscServlet">
                                     <input type="text" value="<%=usuario%>" name="usuario" hidden="on" >
                                     <table class="table table-user-information">
                                         <tbody>
                                             
                                             <h4>Fecha</h4>
                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="dd/mm/aa">
+                                                <input name = "fecha" type="text" class="form-control" placeholder="dd/mm/aa">
                                            </div> 
 
                                             
@@ -79,15 +81,15 @@
                                             <h4>Turno</h4>
                                             <div class="radio">
                                                 <label>
-                                                  <input type="radio" name="turnos" id="turnos" value="turno1" checked>
+                                                  <input type="radio" name="turnos" id="turnos" value="1" checked>
                                                   Mañana
                                                 </label>
                                                 <label>
-                                                  <input type="radio" name="turnos" id="turnos" value="turno2" >
+                                                  <input type="radio" name="turnos" id="turnos" value="2" >
                                                   Tarde
                                                 </label>
                                                 <label>
-                                                  <input type="radio" name="turnos" id="turnos" value="turno3" >
+                                                  <input type="radio" name="turnos" id="turnos" value="3" >
                                                   Noche
                                                 </label>
                                             </div>

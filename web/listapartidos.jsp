@@ -20,7 +20,7 @@
 
         <%List p = (List) request.getAttribute("partidos");%>
         <%String usuario = (String) request.getAttribute("usuario");%>
-        <%List l = p; %>
+        <%List l = new ArrayList(); %>
         
         
         <%
@@ -66,7 +66,7 @@
                         <div class=" col-md-9 col-lg-9 "> 
                                 <table class="table table-user-information">
                                     <tbody>
-
+                                        
                                             <% for(int i=0; i<l.size(); i++){
                                                 
                                                 PartidoBean a = new PartidoBean();
@@ -80,15 +80,18 @@
                                                 
                                                 <br>
                                                 
-                                                <form action="SERVLET X" method="post">
+                                                <form  method="get" action="LoginServlet" >
                                                     <div class="btn-group">
                                                     
+                                                                                                             
+                                                        <button type="submit" name="salir" class="btn btn-default" value="salir">Salir del partido</button>
+                                                                                                            
                                                         <button type="submit" class="btn btn-default" value="ver">Ver información</button>
                                                     
                                                         <input type="hidden" name="partido" value="<%= a.getId() %>" />                                                        
                                                                                                                 
-                                                        <button type="submit" class="btn btn-default" value="salir">Salir del partido</button>
-                                                    
+                                                        <input type="hidden" name="usuario" value="<%= usuario %>" />   
+                                                        
                                                     </div>      
                                                 </form>
                                                         
@@ -99,7 +102,7 @@
                                     </tbody>
                                 </table>
 
-                                <a href="index.html" class="btn btn-default">Volver</a>
+                                <a href="usuario.jsp" class="btn btn-default">Volver</a>
 
                         </div>
                     </div>

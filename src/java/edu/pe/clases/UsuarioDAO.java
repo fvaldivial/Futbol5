@@ -73,6 +73,19 @@ public class UsuarioDAO implements UsuarioIF{
         
         return userc;
     }
+    
+     @Override
+    public DBObject getInfo2(UsuarioBean u) {
+        try {
+            inicializar();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DBObject userc = usuarios.findOne(new BasicDBObject("_id", u.getUsuario()));
+        
+        return userc;
+    }
 
     
     @Override
