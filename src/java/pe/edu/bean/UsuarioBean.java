@@ -3,6 +3,7 @@
 package pe.edu.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class UsuarioBean implements Serializable{
@@ -13,11 +14,11 @@ public class UsuarioBean implements Serializable{
     private String telefono;
     private String usuario;
     private String direccion;
-    private String[] partidos;
+    private List partidos;
 
     public UsuarioBean(){}
     
-    public UsuarioBean(String dni, String email, String nombre, String telefono, String usuario, String direccion, String[] partidos) {
+    public UsuarioBean(String dni, String email, String nombre, String telefono, String usuario, String direccion, List partidos) {
         this.dni = dni;
         this.email = email;
         this.nombre = nombre;
@@ -67,11 +68,11 @@ public class UsuarioBean implements Serializable{
         this.telefono = telefono;
     }
 
-    public String[] getPartidos() {
+    public List getPartidos() {
         return partidos;
     }
 
-    public void setPartidos(String[] partidos) {
+    public void setPartidos(List partidos) {
         this.partidos = partidos;
     }
 

@@ -4,6 +4,8 @@
     Author     : GooMoonRyong
 --%>
 
+<%@page import="pe.edu.bean.PartidoBean"%>
+<%@page import="java.util.List"%>
 <%@page import="pe.edu.bean.UsuarioBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +21,7 @@
 
         <%---  ---%>
 
-        <% String[] b = usu.getPartidos();%>
+        <% List b = usu.getPartidos();%>
 
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -38,11 +40,11 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#tab1info" data-toggle="tab">Editar perfil</a></li>
                                 
-                                <li><a href="#tab3info" data-toggle="tab">no tocar</a></li>
+                                <li><a href="InscServlet?usuario=<%=usu.getUsuario()%>">Crear Partido</a></li>
                                 <li class="dropdown">
                                     <a href="#" data-toggle="dropdown">Inscripcion<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="InscServlet?usuario=<%=usu.getUsuario()%>"  >Forma normal</a></li>
+                                        <li><a href="PartidoServlet?usuario=<%=usu.getUsuario()%>"  >Forma normal</a></li>
                                         <li><a href="#tab5info" data-toggle="tab">Forma solidaria</a></li>
                                     </ul>
                                 </li>
@@ -84,11 +86,11 @@
                                             <td><%= usu.getTelefono()%></td>
                                         </tr>
 
-                                        <% for (int i = 0; i < b.length; i++) {%>
+                                        <% for (int i = 0; i < b.size(); i++) {%>
 
                                         <tr>
-                                            <td>partido <%= i%> : </td>
-                                            <td>codigo <%= b[i]%></td>
+                                            <td>id : <%= ((PartidoBean) b.get(i)).getId() %> </td>
+                                            <td>cancha : <%= ((PartidoBean) b.get(i)).getCancha() %></td>
                                         </tr>
 
                                         <%}%>

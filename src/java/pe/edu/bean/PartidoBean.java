@@ -8,16 +8,16 @@ import java.io.Serializable;
 public class PartidoBean  implements Serializable{
     public String id;
     public String cancha;
-    public int admin;
+    public String admin;
     public int[] jugadores;
     public int turno;
     public String fechai;
     public String fechap;
     public int pago; //si pago 1, si no pago 0
     public int idpago;
-    public int cont; //contador de dias
+    //public int cont; //contador de dias
 
-    public PartidoBean(String id, String cancha, int admin, int[] jugadores, int turno, String fechai, String fechap, int pago, int cont) {
+    public PartidoBean(String id, String cancha, String admin, int[] jugadores, int turno, String fechai, String fechap, int pago, int cont) {
         this.id = id;
         this.cancha = cancha;
         this.admin = admin;
@@ -26,7 +26,7 @@ public class PartidoBean  implements Serializable{
         this.fechai = fechai;
         this.fechap = fechap;
         this.pago = pago;
-        this.cont = cont;
+        //this.cont = cont;
     }
 
     public PartidoBean() {
@@ -49,11 +49,11 @@ public class PartidoBean  implements Serializable{
         this.cancha = cancha;
     }
 
-    public int getAdmin() {
+    public String getAdmin() {
         return admin;
     }
 
-    public void setAdmin(int admin) {
+    public void setAdmin(String admin) {
         this.admin = admin;
     }
 
@@ -97,14 +97,14 @@ public class PartidoBean  implements Serializable{
         this.pago = pago;
     }
 
-    public int getCont() {
-        return cont;
-    }
-
-    public void setCont(int cont) {
-        this.cont = cont;
-    }
-    
+//    public int getCont() {
+//        return cont;
+//    }
+//
+//    public void setCont(int cont) {
+//        this.cont = cont;
+//    }
+//    
     
     
 }

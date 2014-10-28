@@ -4,9 +4,17 @@
         <servlet-name>RegistrarServlet</servlet-name>
         <servlet-class>pe.edu.servlets.RegistrarServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PartInsServlet</servlet-name>
+        <servlet-class>pe.edu.servlets.PartInsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrarServlet</servlet-name>
         <url-pattern>/RegistrarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PartInsServlet</servlet-name>
+        <url-pattern>/PartInsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

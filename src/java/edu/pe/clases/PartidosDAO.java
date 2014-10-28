@@ -15,20 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pe.edu.bean.CanchaBean;
 import pe.edu.bean.PartidoBean;
-import pe.edu.bean.UsuarioBean;
 
 public class PartidosDAO implements PartidosIF {
 
     MongoClient mc = null;
     DB DB = null;
     DBCollection partidos = null;
+    DBCollection canchas = null;
 
     private void inicializar() throws UnknownHostException {
 
         mc = new MongoClient("localhost", 27017);
         DB = mc.getDB("futbol5");
         partidos = DB.getCollection("partidos");
+        canchas = DB.getCollection("canchas");
         //System.out.println("okokokk");
     }
 
@@ -74,27 +76,22 @@ public class PartidosDAO implements PartidosIF {
                 DBObject partido = new BasicDBObject();
                 partido = cursor.next();
                 PartidoBean u = new PartidoBean();
-                u.setAdmin(Integer.parseInt((String) partido.get("admin")));
+                u.setAdmin((String) partido.get("admin"));
                 u.setCancha((String) partido.get("cancha"));
-                u.setCont(Integer.parseInt((String) partido.get("cont")));
+                //u.setCont(Integer.parseInt((String) partido.get("cont")));
                 u.setFechai((String) partido.get("fechai"));
                 u.setFechap((String) partido.get("fechap"));
-                u.setId((String) partido.get("_id"));
-                // Determinar si se necesita el arreglo de jugadores aqui u.setJugadores((String)jugadores);
-                //determinar u.setPago((String)pago);
-                //igual u.setTurno((String)turno);
+                u.setId("" + partido.get("_id"));
                 PB.add(u);
-
             }
         } finally {
             cursor.close();
         }
 
         return PB;
-
     }
 
-    public List listarPartidosXUsuario(int admin) throws UnknownHostException {
+    public List listarPartidosXUsuario(String admin) throws UnknownHostException {
         inicializar();
 
         List<PartidoBean> PB = new ArrayList<PartidoBean>();
@@ -107,15 +104,12 @@ public class PartidosDAO implements PartidosIF {
                 DBObject partido = new BasicDBObject();
                 partido = cursor.next();
                 PartidoBean u = new PartidoBean();
-                u.setAdmin(Integer.parseInt((String) partido.get("admin")));
+                u.setAdmin((String) partido.get("admin"));
                 u.setCancha((String) partido.get("cancha"));
-                u.setCont(Integer.parseInt((String) partido.get("cont")));
+                //u.setCont(Integer.parseInt((String) partido.get("cont")));
                 u.setFechai((String) partido.get("fechai"));
                 u.setFechap((String) partido.get("fechap"));
-                u.setId((String) partido.get("_id"));
-                // Determinar si se necesita el arreglo de jugadores aqui u.setJugadores((String)jugadores);
-                //determinar u.setPago((String)pago);
-                //igual u.setTurno((String)turno);
+                u.setId("" + partido.get("_id"));
                 PB.add(u);
 
             }
@@ -135,6 +129,30 @@ public class PartidosDAO implements PartidosIF {
 	partidos.remove(query);
         
 
+    }
+    
+    
+    public List buscarCanchas()throws UnknownHostException {
+        inicializar();
+
+        List<CanchaBean> PB = new ArrayList<CanchaBean>();
+
+        DBCursor cursor = canchas.find();
+        try {
+            while (cursor.hasNext()) {
+                DBObject partido = new BasicDBObject();
+                partido = cursor.next();
+                CanchaBean u = new CanchaBean();
+                u.setId(partido.get("_id") + "");
+                u.setLocal((String) partido.get("local"));
+                PB.add(u);
+
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return PB;
     }
 
 }

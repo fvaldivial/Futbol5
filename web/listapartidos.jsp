@@ -18,25 +18,9 @@
 
         <link href="css/mine.css" rel="stylesheet">
 
-        <%List p = (List) request.getAttribute("partidos");%>
+        <%List l = (List) request.getAttribute("partidos");%>
         <%String usuario = (String) request.getAttribute("usuario");%>
-        <%List l = new ArrayList(); %>
-        
-        
-        <%
-        for(int i=0; i<5; i++){
-            PartidoBean p2 = new PartidoBean();
-            p2.setId("asdasd");
-            p2.setFechai("ayer");
-            p2.setCancha("tu jato");
-            l.add(p2);            
-        }%>
-        
-        <%--
-        <% PartidoBean b = new PartidoBean();
-        b = (PartidoBean) l.get(1); 
-        %>
-        --%>
+       
         <%---  ---%>
 
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -44,71 +28,79 @@
 
         <title> Lista de partidos </title>
     </head>
-    
-    
-    
+
+
+
     <body>
-        
-        <div class="intro-header">
+        <form  method="post" action="PartInsServlet" >
+            <div class="intro-header">
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
 
 
-                <div class="panel panel-info">
-                    
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><%= "Lista de partidos" %></h3>
-                        <h4 class="panel-title"><%= usuario %></h4>
-                    </div>
-                    
-                    <div class="panel-body">
+                    <div class="panel panel-info">
 
-                        <div class=" col-md-9 col-lg-9 "> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><%= "Lista de partidos"%></h3>
+                            <h4 class="panel-title"><%= usuario%></h4>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class=" col-md-9 col-lg-9 "> 
                                 <table class="table table-user-information">
                                     <tbody>
+                                      
+                                      <input type="hidden" name="usuario" value="<%= usuario%>" />      
                                         
-                                            <% for(int i=0; i<l.size(); i++){
-                                                
-                                                PartidoBean a = new PartidoBean();
-                                                a = (PartidoBean) l.get(i); %>
-                                                
-                                                <label>FECHA: <%= a.getFechai().toString() %></label>
-                                                
-                                                <br>
-                                                
-                                                <label>LUGAR: <%= a.getCancha()%></label>
-                                                
-                                                <br>
-                                                
-                                                <form  method="get" action="LoginServlet" >
-                                                    <div class="btn-group">
-                                                    
-                                                                                                             
-                                                        <button type="submit" name="salir" class="btn btn-default" value="salir">Salir del partido</button>
-                                                                                                            
-                                                        <button type="submit" class="btn btn-default" value="ver">Ver información</button>
-                                                    
-                                                        <input type="hidden" name="partido" value="<%= a.getId() %>" />                                                        
-                                                                                                                
-                                                        <input type="hidden" name="usuario" value="<%= usuario %>" />   
-                                                        
-                                                    </div>      
-                                                </form>
-                                                        
-                                                <br>
-                                                    
-                                            <% } %>
+                                        <% for (int i = 0; i < l.size(); i++) {
+
+                                                PartidoBean a;
+                                                a = (PartidoBean) l.get(i);%>
+
+                                    <label>FECHA: <%= a.getFechai().toString()%></label>
+
+                                    <br>
+
+                                    <label>LUGAR: <%= a.getCancha()%></label>
+
+                                    <br>
+
+
+                                    <div class="btn-group">
+
+
+                                        <button type="submit" name="salir" class="btn btn-default" value="salir">Incribirse</button>
+
+                                        <button type="submit" class="btn btn-default" value="ver">Detalles</button>
+
+                                        <input type="hidden" name="partido" value="<%= a.getId()%>" />                                                        
+
+                                       
+
+                                    </div>      
+
+
+                                    <br>
+
+                                    <% }%>
 
                                     </tbody>
+
+
                                 </table>
 
-                                <a href="usuario.jsp" class="btn btn-default">Volver</a>
+
+                                <a href="LoginServlet?usuario=<%=usuario%>" class="btn btn-default" >volver</a> 
+
+                            </div>
 
                         </div>
+
                     </div>
                 </div>
-            </div>
-        </div>           
+            </div>           
+        </form>
 
     </body>
 </html>

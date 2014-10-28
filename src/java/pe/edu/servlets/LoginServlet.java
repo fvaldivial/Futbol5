@@ -5,11 +5,15 @@
 package pe.edu.servlets;
 
 import com.mongodb.DBObject;
+import edu.pe.clases.PartidosDAO;
 import edu.pe.clases.UsuarioDAO;
 import edu.pe.clases.UsuarioIF;
 import edu.pe.clases.Utilitarios;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,83 +21,59 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pe.edu.bean.CanchaBean;
 import pe.edu.bean.UsuarioBean;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-
-   
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
-        }
-    }
-
+    
+    //Debe venir de los botones regresar en la lista de partidos o la creacion de partidos
+    //Asi tambien debe venir despues de la correcta inscripcion de partido o creacion de este
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        //Paso 1: recuperar sesion
+        
+         //Paso 1: recuperar sesion
         HttpSession s = request.getSession(true);
 
         //Paso 2: recuperar datos
         UsuarioBean u = new UsuarioBean();
         u.setUsuario(request.getParameter("usuario"));
-        String pass = request.getParameter("password");
 
         //Paso 3: logica
-               
-        UsuarioIF ui = new UsuarioDAO();
-        DBObject d = ui.getInfo2(u);
-        
-        //Paso 4: pasar datos a la pagina
-        
-        //Paso 5: enviar a la pagina
 
+        UsuarioIF ui = new UsuarioDAO();
+        DBObject d = ui.getInfo(u);
         
-//        System.out.println(Utilitarios.password(pass,u,d));
-        
-       
-        
-//        if(d != null && pass.equals(d.get("password"))){
+        PartidosDAO p = new PartidosDAO();
+        u.setPartidos( p.listarPartidosXUsuario(u.getUsuario()));
+
+       //System.out.println(Utilitarios.password(pass,u,d));
             u.setUsuario((String) d.get("_id"));
             u.setDni((String) d.get("dni"));
             u.setEmail((String) d.get("email"));
             u.setNombre((String) d.get("nombre"));
             u.setTelefono((String) d.get("telf"));
             u.setDireccion((String) d.get("direccion"));
-            String[] a = {"1", "2"};
-            u.setPartidos(a);
-            
-             request.setAttribute("usuario", u);
+            //String[] a = {"1", "2"};
+            //u.setPartidos(a);
+
+            request.setAttribute("usuario", u);
 
             System.out.println(u.getDni());
             System.out.println(u.getUsuario());
             System.out.println(u.getTelefono());
-            
-            
+
+
             RequestDispatcher rd = request.getRequestDispatcher("usuario.jsp");
             rd.forward(request, response);
         
-        
-        
-        
     }
 
-    
+    //Viene de login.html
+    //el if verifica si devolvio algo el id de usuario y si es que la contraseña corresponde a la guardada
+    //1. Envia a usuario.jsp
+    //2. Envia a pagina de error y luego de regreso.
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -106,41 +86,40 @@ public class LoginServlet extends HttpServlet {
         String pass = request.getParameter("password");
 
         //Paso 3: logica
-               
+
         UsuarioIF ui = new UsuarioDAO();
         DBObject d = ui.getInfo(u);
-        
-        //Paso 4: pasar datos a la pagina
-        
-        //Paso 5: enviar a la pagina
 
+        PartidosDAO p = new PartidosDAO();
         
-//        System.out.println(Utilitarios.password(pass,u,d));
         
-        if(d != null && Utilitarios.password(pass,u,d)){
-        
-//        if(d != null && pass.equals(d.get("password"))){
+       //System.out.println(Utilitarios.password(pass,u,d));
+
+        if (d != null && Utilitarios.password(pass, u, d)) {
+
             u.setUsuario((String) d.get("_id"));
             u.setDni((String) d.get("dni"));
             u.setEmail((String) d.get("email"));
             u.setNombre((String) d.get("nombre"));
             u.setTelefono((String) d.get("telf"));
             u.setDireccion((String) d.get("direccion"));
-            String[] a = {"1", "2"};
-            u.setPartidos(a);
+//            String[] a = {"1", "2"};
+//            u.setPartidos(a);
+
+            u.setPartidos( p.listarPartidosXUsuario(u.getUsuario()));
             
-             request.setAttribute("usuario", u);
+            request.setAttribute("usuario", u);
 
             System.out.println(u.getDni());
             System.out.println(u.getUsuario());
             System.out.println(u.getTelefono());
-            
-            
+
+
             RequestDispatcher rd = request.getRequestDispatcher("usuario.jsp");
             rd.forward(request, response);
-        
-        }else{
-        
+
+        } else {
+
             PrintWriter out = response.getWriter();
             out.println("<html>");
             out.println("<head>");
@@ -155,15 +134,13 @@ public class LoginServlet extends HttpServlet {
             out.println("</div>");
             out.println("</body>");
             out.println("</html>");
-            
+
         }
 
-        
-        
-        
-        
-        
-    }
 
-    
+
+
+
+
+    }
 }

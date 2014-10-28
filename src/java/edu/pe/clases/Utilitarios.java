@@ -4,10 +4,16 @@
  */
 package edu.pe.clases;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import pe.edu.bean.CanchaBean;
 import pe.edu.bean.UsuarioBean;
 import sun.misc.BASE64Encoder;
 
@@ -16,7 +22,7 @@ import sun.misc.BASE64Encoder;
  * @author GooMoonRyong
  */
 public class Utilitarios {
-    
+
     public static String makePasswordHash(String password, String salt) {
         try {
             String saltedAndHashed = password + "," + salt;
@@ -32,20 +38,33 @@ public class Utilitarios {
         }
     }
 
-    public static boolean password(String pass,UsuarioBean u,DBObject db) {
-        
+    public static boolean password(String pass, UsuarioBean u, DBObject db) {
+
         String hashedAndSalted = (String) db.get("password");
 
         String salt = hashedAndSalted.split(",")[1];
-        
+
         if (!hashedAndSalted.equals(Utilitarios.makePasswordHash(pass, salt))) {
             System.out.println(Utilitarios.makePasswordHash(pass, salt));
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-    
-    
-    
+
+    public static void crearCanchas(CanchaBean c) throws UnknownHostException {
+
+        MongoClient mc = null;
+        DB DB = null;
+        DBCollection canchas = null;
+
+        mc = new MongoClient("localhost", 27017);
+        DB = mc.getDB("futbol5");
+        canchas = DB.getCollection("canchas");
+        BasicDBObject partido = new BasicDBObject();
+        //verificar si la lista de jugadores se inserta correctamente
+        partido.append("_id",c.getId()).append("local",c.getLocal());
+        canchas.insert(partido);
+
+    }
 }
