@@ -8,14 +8,6 @@
         <servlet-name>PartInsServlet</servlet-name>
         <servlet-class>pe.edu.servlets.PartInsServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ListaInscServlet</servlet-name>
-        <servlet-class>pe.edu.servlets.ListaInscServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CancelarServlet</servlet-name>
-        <servlet-class>pe.edu.servlets.CancelarServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrarServlet</servlet-name>
         <url-pattern>/RegistrarServlet</url-pattern>
@@ -23,14 +15,6 @@
     <servlet-mapping>
         <servlet-name>PartInsServlet</servlet-name>
         <url-pattern>/PartInsServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListaInscServlet</servlet-name>
-        <url-pattern>/ListaInscServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CancelarServlet</servlet-name>
-        <url-pattern>/CancelarServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
