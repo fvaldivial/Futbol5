@@ -10,8 +10,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,10 +27,13 @@ public class PartidosDAO implements PartidosIF {
     DB DB = null;
     DBCollection partidos = null;
     DBCollection canchas = null;
+    MongoCredential credential=null;
 
     private void inicializar() throws UnknownHostException {
 
-        mc = new MongoClient("localhost", 27017);
+        credential = MongoCredential.createMongoCRCredential("futbol5", "futbol5", "futbol5".toCharArray());
+        mc = new MongoClient(new ServerAddress("ds047800.mongolab.com", 47800), Arrays.asList(credential));
+
         DB = mc.getDB("futbol5");
         partidos = DB.getCollection("partidos");
         canchas = DB.getCollection("canchas");
@@ -125,14 +131,12 @@ public class PartidosDAO implements PartidosIF {
         //como se va a determinar que partido se cancela? bajo que pk?
         inicializar();
         BasicDBObject query = new BasicDBObject();
-	query.put("_id", id);
-	partidos.remove(query);
-        
+        query.put("_id", id);
+        partidos.remove(query);
 
     }
-    
-    
-    public List buscarCanchas()throws UnknownHostException {
+
+    public List buscarCanchas() throws UnknownHostException {
         inicializar();
 
         List<CanchaBean> PB = new ArrayList<CanchaBean>();
