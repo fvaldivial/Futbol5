@@ -26,58 +26,17 @@ import pe.edu.bean.UsuarioBean;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-    
-    //Debe venir de los botones regresar en la lista de partidos o la creacion de partidos
-    //Asi tambien debe venir despues de la correcta inscripcion de partido o creacion de este
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-         //Paso 1: recuperar sesion
-        HttpSession s = request.getSession(true);
 
-        //Paso 2: recuperar datos
-        UsuarioBean u = new UsuarioBean();
-        u.setUsuario(request.getParameter("usuario"));
-
-        //Paso 3: logica
-
-        UsuarioIF ui = new UsuarioDAO();
-        DBObject d = ui.getInfo(u);
-        
-        PartidosDAO p = new PartidosDAO();
-        u.setPartidos( p.listarPartidosXUsuario(u.getUsuario()));
-
-       //System.out.println(Utilitarios.password(pass,u,d));
-            u.setUsuario((String) d.get("_id"));
-            u.setDni((String) d.get("dni"));
-            u.setEmail((String) d.get("email"));
-            u.setNombre((String) d.get("nombre"));
-            u.setTelefono((String) d.get("telf"));
-            u.setDireccion((String) d.get("direccion"));
-            //String[] a = {"1", "2"};
-            //u.setPartidos(a);
-
-            request.setAttribute("usuario", u);
-
-            System.out.println(u.getDni());
-            System.out.println(u.getUsuario());
-            System.out.println(u.getTelefono());
-
-
-            RequestDispatcher rd = request.getRequestDispatcher("usuario.jsp");
-            rd.forward(request, response);
-        
-    }
-
-    //Viene de login.html
+        //Viene de login.html
     //el if verifica si devolvio algo el id de usuario y si es que la contraseña corresponde a la guardada
     //1. Envia a usuario.jsp
     //2. Envia a pagina de error y luego de regreso.
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Paso 1: recuperar sesion
+        
+         
+            //Paso 1: recuperar sesion
         HttpSession s = request.getSession(true);
 
         //Paso 2: recuperar datos
@@ -141,6 +100,50 @@ public class LoginServlet extends HttpServlet {
 
 
 
+        
+    }
+
+    
+    //Debe venir de los botones regresar en la lista de partidos o la creacion de partidos
+    //Asi tambien debe venir despues de la correcta inscripcion de partido o creacion de este
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //Paso 1: recuperar sesion
+        HttpSession s = request.getSession(true);
+
+        //Paso 2: recuperar datos
+        UsuarioBean u = new UsuarioBean();
+        u.setUsuario(request.getParameter("usuario"));
+
+        //Paso 3: logica
+
+        UsuarioIF ui = new UsuarioDAO();
+        DBObject d = ui.getInfo(u);
+        
+        PartidosDAO p = new PartidosDAO();
+        u.setPartidos( p.listarPartidosXUsuario(u.getUsuario()));
+
+       //System.out.println(Utilitarios.password(pass,u,d));
+            u.setUsuario((String) d.get("_id"));
+            u.setDni((String) d.get("dni"));
+            u.setEmail((String) d.get("email"));
+            u.setNombre((String) d.get("nombre"));
+            u.setTelefono((String) d.get("telf"));
+            u.setDireccion((String) d.get("direccion"));
+            //String[] a = {"1", "2"};
+            //u.setPartidos(a);
+
+            request.setAttribute("usuario", u);
+
+            System.out.println(u.getDni());
+            System.out.println(u.getUsuario());
+            System.out.println(u.getTelefono());
+
+
+            RequestDispatcher rd = request.getRequestDispatcher("usuario.jsp");
+            rd.forward(request, response);
+            
 
     }
 }

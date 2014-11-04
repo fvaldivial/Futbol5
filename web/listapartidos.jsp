@@ -32,7 +32,7 @@
 
 
     <body>
-        <form  method="post" action="PartInsServlet" >
+        
             <div class="intro-header">
 
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
@@ -50,7 +50,7 @@
                             <div class=" col-md-9 col-lg-9 "> 
                                 <table class="table table-user-information">
                                     <tbody>
-                                      
+                                      <form  method="post" action="PartInsServlet" >
                                       <input type="hidden" name="usuario" value="<%= usuario%>" />      
                                         
                                         <% for (int i = 0; i < l.size(); i++) {
@@ -76,7 +76,7 @@
 
                                         <input type="hidden" name="partido" value="<%= a.getId()%>" />                                                        
 
-                                       
+                                        
 
                                     </div>      
 
@@ -84,15 +84,17 @@
                                     <br>
 
                                     <% }%>
-
+                                    </form>
                                     </tbody>
 
-
+                                   
                                 </table>
 
-
-                                <a href="LoginServlet?usuario=<%=usuario%>" class="btn btn-default" >volver</a> 
-
+                                    <form method="post" action="LoginServlet">          
+                                        
+                                         <button type="submit" name="usuario" class="btn btn-default" value="<%=usuario%>">volver</button>
+ 
+                                    </form>   
                             </div>
 
                         </div>
@@ -100,7 +102,7 @@
                     </div>
                 </div>
             </div>           
-        </form>
+       
 
     </body>
 </html>
