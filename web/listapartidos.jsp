@@ -20,7 +20,7 @@
 
         <%List l = (List) request.getAttribute("partidos");%>
         <%String usuario = (String) request.getAttribute("usuario");%>
-       
+
         <%---  ---%>
 
         <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -32,34 +32,38 @@
 
 
     <body>
-        
-            <div class="intro-header">
 
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+        <div class="intro-header">
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
 
 
-                    <div class="panel panel-info">
+                <div class="panel panel-info">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><%= "Lista de partidos"%></h3>
-                            <h4 class="panel-title"><%= usuario%></h4>
-                        </div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><%= "Lista de partidos"%></h3>
+                        <h4 class="panel-title"><%= usuario%></h4>
+                    </div>
 
-                        <div class="panel-body">
-
+                    <div class="panel-body">
+                        
                             <div class=" col-md-9 col-lg-9 "> 
                                 <table class="table table-user-information">
                                     <tbody>
-                                      <form  method="post" action="PartInsServlet" >
-                                      <input type="hidden" name="usuario" value="<%= usuario%>" />      
                                         
-                                        <% for (int i = 0; i < l.size(); i++) {
+                 <%-- hijo (rafael) esto te manda al metodo post lo puse aca para que lo veas mas rapido--%>
+                                    <form  method="post" action="PartInsServlet" >
 
-                                                PartidoBean a;
-                                                a = (PartidoBean) l.get(i);%>
+
+                                    <input type="hidden" name="usuario" value="<%= usuario%>" />      
+
+                                    <% for (int i = 0; i < l.size(); i++) {
+
+                                            PartidoBean a;
+                                            a = (PartidoBean) l.get(i);%>
 
                                     <label>FECHA: <%= a.getFechai().toString()%></label>
-
+                                        <input type="hidden" name="partido" value="<%= a%>" />  
                                     <br>
 
                                     <label>LUGAR: <%= a.getCancha()%></label>
@@ -72,11 +76,12 @@
 
                                         <button type="submit" name="salir" class="btn btn-default" value="salir">Incribirse</button>
 
+
                                         <button type="submit" class="btn btn-default" value="ver">Detalles</button>
 
                                         <input type="hidden" name="partido" value="<%= a.getId()%>" />                                                        
 
-                                        
+
 
                                     </div>      
 
@@ -87,22 +92,22 @@
                                     </form>
                                     </tbody>
 
-                                   
+
                                 </table>
 
-                                    <form method="post" action="LoginServlet">          
-                                        
-                                         <button type="submit" name="usuario" class="btn btn-default" value="<%=usuario%>">volver</button>
- 
-                                    </form>   
+                                <form method="post" action="LoginServlet">          
+
+                                    <button type="submit" name="usuario" class="btn btn-default" value="<%=usuario%>">volver</button>
+
+                                </form>   
                             </div>
 
-                        </div>
-
                     </div>
+
                 </div>
-            </div>           
-       
+            </div>
+        </div>           
+
 
     </body>
 </html>

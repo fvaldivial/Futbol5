@@ -27,7 +27,7 @@ import pe.edu.bean.UsuarioBean;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-        //Viene de login.html
+    //Viene de login.html
     //el if verifica si devolvio algo el id de usuario y si es que la contraseña corresponde a la guardada
     //1. Envia a usuario.jsp
     //2. Envia a pagina de error y luego de regreso.
@@ -77,7 +77,29 @@ public class LoginServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("usuario.jsp");
             rd.forward(request, response);
 
-        } else {
+        } else if(d != null && request.getAttribute("servlet") != null) { 
+                        u.setUsuario((String) d.get("_id"));
+            u.setDni((String) d.get("dni"));
+            u.setEmail((String) d.get("email"));
+            u.setNombre((String) d.get("nombre"));
+            u.setTelefono((String) d.get("telf"));
+            u.setDireccion((String) d.get("direccion"));
+//            String[] a = {"1", "2"};
+//            u.setPartidos(a);
+
+            u.setPartidos( p.listarPartidosXUsuario(u.getUsuario()));
+            
+            request.setAttribute("usuario", u);
+
+            System.out.println(u.getDni());
+            System.out.println(u.getUsuario());
+            System.out.println(u.getTelefono());
+
+
+            RequestDispatcher rd = request.getRequestDispatcher("usuario.jsp");
+            rd.forward(request, response);
+            
+        }else {
 
             PrintWriter out = response.getWriter();
             out.println("<html>");
@@ -114,23 +136,22 @@ public class LoginServlet extends HttpServlet {
 
         //Paso 2: recuperar datos
         UsuarioBean u = new UsuarioBean();
-        u.setUsuario(request.getParameter("usuario"));
+        u.setUsuario((String) request.getAttribute("usuario"));
 
         //Paso 3: logica
 
         UsuarioIF ui = new UsuarioDAO();
-        DBObject d = ui.getInfo(u);
+        u = ui.getInfo2((String) request.getAttribute("usuario"));
         
         PartidosDAO p = new PartidosDAO();
         u.setPartidos( p.listarPartidosXUsuario(u.getUsuario()));
 
        //System.out.println(Utilitarios.password(pass,u,d));
-            u.setUsuario((String) d.get("_id"));
-            u.setDni((String) d.get("dni"));
-            u.setEmail((String) d.get("email"));
-            u.setNombre((String) d.get("nombre"));
-            u.setTelefono((String) d.get("telf"));
-            u.setDireccion((String) d.get("direccion"));
+//            u.setDni((String) d.get("dni"));
+//            u.setEmail((String) d.get("email"));
+//            u.setNombre((String) d.get("nombre"));
+//            u.setTelefono((String) d.get("telf"));
+//            u.setDireccion((String) d.get("direccion"));
             //String[] a = {"1", "2"};
             //u.setPartidos(a);
 

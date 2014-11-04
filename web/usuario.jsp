@@ -44,8 +44,8 @@
                                 <li class="dropdown">
                                     <a href="#" data-toggle="dropdown">Inscripcion<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="PartidoServlet?usuario=<%=usu.getUsuario()%>"  >Forma normal</a></li>
-                                        <li><a href="#tab5info" data-toggle="tab">Forma solidaria</a></li>
+                                        <li><a href="PartidoServlet?usuario=<%=usu.getUsuario()%>">Forma normal</a></li>
+                                        <li><a href="PartInsServlet?usuario=<%=usu.getUsuario()%>">Forma solidaria</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="index.html" >Salir</a></li>
@@ -91,6 +91,7 @@
                                         <tr>
                                             <td>id : <%= ((PartidoBean) b.get(i)).getId() %> </td>
                                             <td>cancha : <%= ((PartidoBean) b.get(i)).getCancha() %></td>
+                                            <td> <a href="CancelarServlet?usuario=<%=usu.getUsuario()%>&partido=<%=((PartidoBean) b.get(i)).getId()%>" class="btn btn-primary">salir de partido</a></td>
                                         </tr>
 
                                         <%}%>

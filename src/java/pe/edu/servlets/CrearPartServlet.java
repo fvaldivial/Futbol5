@@ -65,6 +65,7 @@ public class CrearPartServlet extends HttpServlet {
         p.crearPartido(p1);
         
         request.setAttribute("usuario", request.getParameter("usuario"));
+        request.setAttribute("servlet", "algo");
         
         RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");    
         rd.forward(request, response);

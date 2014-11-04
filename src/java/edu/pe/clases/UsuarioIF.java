@@ -17,7 +17,7 @@ public interface UsuarioIF {
     
     public DBObject getInfo(UsuarioBean u);
     
-    public DBObject getInfo2(UsuarioBean u);
+    public UsuarioBean getInfo2(String username);
     
     public DBObject login (UsuarioBean u);
 }
