@@ -9,10 +9,13 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import pe.edu.bean.CanchaBean;
 import pe.edu.bean.UsuarioBean;
 import sun.misc.BASE64Encoder;
@@ -57,8 +60,12 @@ public class Utilitarios {
         MongoClient mc = null;
         DB DB = null;
         DBCollection canchas = null;
+        MongoCredential credential = null;
+        
+        credential = MongoCredential.createMongoCRCredential("futbol5", "futbol5", "futbol5".toCharArray());
+        mc = new MongoClient(new ServerAddress("ds047800.mongolab.com", 47800), Arrays.asList(credential));
 
-        mc = new MongoClient("localhost", 27017);
+        //mc = new MongoClient("localhost", 27017);
         DB = mc.getDB("futbol5");
         canchas = DB.getCollection("canchas");
         BasicDBObject partido = new BasicDBObject();
