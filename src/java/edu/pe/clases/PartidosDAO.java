@@ -97,8 +97,12 @@ public class PartidosDAO implements PartidosIF {
         return PB;
     }
 
-    public List listarPartidosXUsuario(String admin) throws UnknownHostException {
-        inicializar();
+    public List listarPartidosXUsuario(String admin){
+        try {
+            inicializar();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         List<PartidoBean> PB = new ArrayList<PartidoBean>();
 
@@ -127,17 +131,26 @@ public class PartidosDAO implements PartidosIF {
 
     }
 
-    public void cancelarPartido(String id) throws UnknownHostException {
-        //como se va a determinar que partido se cancela? bajo que pk?
-        inicializar();
-        BasicDBObject query = new BasicDBObject();
-        query.put("_id", id);
-        partidos.remove(query);
+    @Override
+    public void cancelarPartido(String id){
+        try {
+            //como se va a determinar que partido se cancela? bajo que pk?
+            inicializar();            
+            BasicDBObject query = new BasicDBObject();
+            query.put("_id", id);
+            partidos.remove(query);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
-    public List buscarCanchas() throws UnknownHostException {
-        inicializar();
+    public List buscarCanchas(){
+        try {
+            inicializar();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         List<CanchaBean> PB = new ArrayList<CanchaBean>();
 

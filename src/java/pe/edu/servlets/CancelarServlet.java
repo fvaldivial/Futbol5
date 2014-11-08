@@ -5,6 +5,7 @@
 package pe.edu.servlets;
 
 import edu.pe.clases.PartidosDAO;
+import edu.pe.clases.PartidosIF;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -28,7 +29,7 @@ public class CancelarServlet extends HttpServlet {
         //Paso 1: recuperar sesion
         HttpSession s = request.getSession(true);
         
-        PartidosDAO p = new PartidosDAO();
+        PartidosIF p = new PartidosDAO();
         
         p.cancelarPartido(request.getParameter("partido"));
         System.out.println("partido id : " + request.getParameter("partido"));
