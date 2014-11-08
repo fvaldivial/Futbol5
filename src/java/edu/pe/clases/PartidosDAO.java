@@ -63,16 +63,24 @@ public class PartidosDAO implements PartidosIF {
         return l;
     }
 
-    public void crearPartido(PartidoBean pb) throws UnknownHostException {
-        inicializar();
+    public void crearPartido(PartidoBean pb){
+        try {
+            inicializar();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         BasicDBObject partido = new BasicDBObject();
         //verificar si la lista de jugadores se inserta correctamente
         partido.append("cancha", pb.getCancha()).append("admin", pb.getAdmin()).append("jugadores", pb.getJugadores()).append("turno", pb.getTurno()).append("fechai", pb.getFechai()).append("pago", pb.getPago());
         partidos.insert(partido);
     }
 
-    public List listarPartidos() throws UnknownHostException {
-        inicializar();
+    public List listarPartidos(){
+        try {
+            inicializar();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         List<PartidoBean> PB = new ArrayList<PartidoBean>();
 
