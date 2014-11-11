@@ -6,6 +6,7 @@ package pe.edu.servlets;
 
 import com.mongodb.DBObject;
 import edu.pe.clases.PartidosDAO;
+import edu.pe.clases.PartidosIF;
 import edu.pe.clases.UsuarioDAO;
 import edu.pe.clases.UsuarioIF;
 import java.io.IOException;
@@ -25,34 +26,24 @@ import pe.edu.bean.UsuarioBean;
  */
 public class PartInsServlet extends HttpServlet {
 
-    
-    //este sera para inscripcion solidaria
-    //SE debe tener un metodo del DAO que ponga a los usuarios en una lista solidaria
-    //el tema del tiempo maximo lo vemos despues
-    //como funcione tambien, con que los grabe esta bien por ahora    
+      
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //aca comienza   
+        
         HttpSession s = request.getSession(true);
-        
-        //con el metodo del dao ya creado voy a sacar toda la info del usuario
-        
-        UsuarioBean u;
-        
+                
+        UsuarioBean u;        
         UsuarioIF ui = new UsuarioDAO();
         
-        //Poner info2 en un utilitario si es necesario
-        u = ui.getInfo2(request.getParameter("usuario"));
+        u = ui.getInfo2(request.getParameter("usuario"));             
+        String DNI = u.getDni();
         
-//        //con el metodo del DAO deberia ponerse al usuario en la lista de solidarios
-//        algoIF a = new algoDAO();
-//        a.insolidaria(u);
-//                
-//       //No deberia haber errores de inscripcion aca     
-//         
-//         RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
-//         rd.forward(request, response);
+        PartidosIF a = new PartidosDAO();
+        a.anadirSolidario(DNI);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
+        rd.forward(request, response);
             
     }
 
@@ -72,9 +63,6 @@ public class PartInsServlet extends HttpServlet {
         
         boolean inscrito = false;
         
-//        //Para fabrizzio y rafael ( MAS PARA FABRIZZIO) : PAR DE IMBECILES ALGUNA SIQUIERA SABE COMO DIABLOS SE USA UN DAO CON
-//        //UNA INTERFAZ? HAS LAS COSAS BIEN 1 VEZ FABRIZZIO Y USA LA INTERFAZ Y NO HAGAS WEVADAS.
-//        
 //        AlgoIF a = new AlgoDAO();
 //        
 //        //aca debe ir el metodo del DAO que saque una lista con los usuarios inscritos para el partido

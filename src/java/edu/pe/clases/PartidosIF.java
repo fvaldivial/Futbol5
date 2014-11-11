@@ -18,5 +18,7 @@ public interface PartidosIF {
     
     public List buscarCanchas();
     
+    public void anadirSolidario(String dni);
     
+    public List obtenerSolidario();
 }

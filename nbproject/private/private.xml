@@ -3,19 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/pe/edu/bean/UsuarioBean.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/pe/edu/servlets/CrearPartServlet.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/web/listapartidos.jsp</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/pe/edu/servlets/PartInsServlet.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/edu/pe/clases/Utilitarios.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/pe/edu/bean/CanchaBean.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/pe/edu/bean/PartidoBean.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/edu/pe/clases/UsuarioIF.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/edu/pe/clases/UsuarioDAO.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/pe/edu/servlets/LoginServlet.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/edu/pe/clases/PartidosDAO.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/edu/pe/clases/PartidosIF.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/Futbol5/src/java/pe/edu/servlets/RegistrarServlet.java</file>
+            <file>file:/C:/Users/Rafael/Documents/GitHub/Futbol5/src/java/pe/edu/servlets/PartInsServlet.java</file>
+            <file>file:/C:/Users/Rafael/Documents/GitHub/Futbol5/src/java/edu/pe/clases/PartidosDAO.java</file>
+            <file>file:/C:/Users/Rafael/Documents/GitHub/Futbol5/web/usuario.jsp</file>
         </group>
     </open-files>
 </project-private>
