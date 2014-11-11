@@ -15,6 +15,7 @@ import com.mongodb.ServerAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,8 @@ public class PartidosDAO implements PartidosIF {
     DB DB = null;
     DBCollection partidos = null;
     DBCollection canchas = null;
-    MongoCredential credential=null;
+    DBCollection solidario = null;
+    MongoCredential credential = null;
 
     private void inicializar() throws UnknownHostException {
 
@@ -37,6 +39,7 @@ public class PartidosDAO implements PartidosIF {
         DB = mc.getDB("futbol5");
         partidos = DB.getCollection("partidos");
         canchas = DB.getCollection("canchas");
+        solidario = DB.getCollection("solidario");
         //System.out.println("okokokk");
     }
 
@@ -63,7 +66,7 @@ public class PartidosDAO implements PartidosIF {
         return l;
     }
 
-    public void crearPartido(PartidoBean pb){
+    public void crearPartido(PartidoBean pb) {
         try {
             inicializar();
         } catch (UnknownHostException ex) {
@@ -75,7 +78,7 @@ public class PartidosDAO implements PartidosIF {
         partidos.insert(partido);
     }
 
-    public List listarPartidos(){
+    public List listarPartidos() {
         try {
             inicializar();
         } catch (UnknownHostException ex) {
@@ -105,7 +108,7 @@ public class PartidosDAO implements PartidosIF {
         return PB;
     }
 
-    public List listarPartidosXUsuario(String admin){
+    public List listarPartidosXUsuario(String admin) {
         try {
             inicializar();
         } catch (UnknownHostException ex) {
@@ -140,10 +143,10 @@ public class PartidosDAO implements PartidosIF {
     }
 
     @Override
-    public void cancelarPartido(String id){
+    public void cancelarPartido(String id) {
         try {
             //como se va a determinar que partido se cancela? bajo que pk?
-            inicializar();            
+            inicializar();
             BasicDBObject query = new BasicDBObject();
             query.put("_id", id);
             partidos.remove(query);
@@ -153,7 +156,7 @@ public class PartidosDAO implements PartidosIF {
 
     }
 
-    public List buscarCanchas(){
+    public List buscarCanchas() {
         try {
             inicializar();
         } catch (UnknownHostException ex) {
@@ -178,6 +181,39 @@ public class PartidosDAO implements PartidosIF {
         }
 
         return PB;
+    }
+
+    public void anadirSolidario(String dni) {
+        try {
+            inicializar();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Date ahora = new Date();
+        
+        BasicDBObject solidario = new BasicDBObject();
+        solidario.append("_id", dni).append("fecha",ahora);
+        
+    }
+    
+    public List obtenerSolidario(){
+        
+        List lista = new ArrayList();
+
+        
+        	BasicDBObject sortFecha = new BasicDBObject();
+		sortFecha.put("fecha", -1);
+
+		DBCursor cur = solidario.find().sort(sortFecha);
+
+		int i = 0;
+		while(cur.hasNext() && i < cur.length())
+		{
+			lista.add(cur.next().get("dni"));
+			
+		}
+                
+                return lista;
     }
 
 }
