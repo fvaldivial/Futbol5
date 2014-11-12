@@ -40,7 +40,7 @@ public class PartidosDAO implements PartidosIF {
         partidos = DB.getCollection("partidos");
         canchas = DB.getCollection("canchas");
         solidario = DB.getCollection("solidario");
-        //System.out.println("okokokk");
+        //System.out.println("okoko");
     }
 
     @Override
