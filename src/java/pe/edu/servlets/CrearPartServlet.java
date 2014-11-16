@@ -4,9 +4,12 @@
  */
 package pe.edu.servlets;
 
+import com.mongodb.BasicDBObject;
 import edu.pe.clases.PartidosDAO;
 import edu.pe.clases.PartidosIF;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +27,6 @@ import pe.edu.bean.PartidoBean;
 @WebServlet(name = "InscServlet", urlPatterns = {"/InscServlet"})
 public class CrearPartServlet extends HttpServlet {
 
- 
     //Viene de usuario.jsp de la pestaña crear partido
     //saca las canchas de la BD y envia las a partidos.jsp
     @Override
@@ -62,12 +64,23 @@ public class CrearPartServlet extends HttpServlet {
         p1.setAdmin(request.getParameter("usuario"));
         p1.setTurno(Integer.parseInt(request.getParameter("turnos")));
 
-        p.crearPartido(p1);
+       
+        ArrayList jug = new ArrayList();
+
+        //metele los jugadores aqui
+
         
+       
+            
+           
+        
+
+        p.crearPartido(p1,jug);
+
         request.setAttribute("usuario", request.getParameter("usuario"));
         request.setAttribute("servlet", "algo");
-        
-        RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");    
+
+        RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
         rd.forward(request, response);
     }
 }

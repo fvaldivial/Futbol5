@@ -74,7 +74,7 @@ public class PartidosDAO implements PartidosIF {
         }
         BasicDBObject partido = new BasicDBObject();
         //verificar si la lista de jugadores se inserta correctamente
-        partido.append("cancha", pb.getCancha()).append("admin", pb.getAdmin()).append("jugadores", pb.getJugadores()).append("turno", pb.getTurno()).append("fechai", pb.getFechai()).append("pago", pb.getPago());
+        partido.append("cancha", pb.getCancha()).append("admin", pb.getAdmin()).append("turno", pb.getTurno()).append("fechai", pb.getFechai()).append("pago", pb.getPago());
         partidos.insert(partido);
     }
 
@@ -107,6 +107,30 @@ public class PartidosDAO implements PartidosIF {
 
         return PB;
     }
+
+//    public List obtenerJugadores(String id) {
+//        try {
+//            inicializar();
+//        } catch (UnknownHostException ex) {
+//            Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        List<PartidoBean> usuarios = new ArrayList<PartidoBean>();
+//
+//        BasicDBObject query = new BasicDBObject("_id", id);
+//
+//        DBCursor cursor = partidos.find(query);
+//
+//        try {
+//            while (cursor.hasNext()) {
+//                cursor.next().get("jugadores");
+//            }
+//        } finally {
+//            cursor.close();
+//        }
+//
+//        return PB;
+//    }
 
     public List listarPartidosXUsuario(String admin) {
         try {
@@ -190,30 +214,28 @@ public class PartidosDAO implements PartidosIF {
             Logger.getLogger(PartidosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         Date ahora = new Date();
-        
+
         BasicDBObject solidario = new BasicDBObject();
-        solidario.append("_id", dni).append("fecha",ahora);
-        
+        solidario.append("_id", dni).append("fecha", ahora);
+
     }
-    
-    public List obtenerSolidario(){
-        
+
+    public List obtenerSolidario() {
+
         List lista = new ArrayList();
 
-        
-        	BasicDBObject sortFecha = new BasicDBObject();
-		sortFecha.put("fecha", -1);
+        BasicDBObject sortFecha = new BasicDBObject();
+        sortFecha.put("fecha", -1);
 
-		DBCursor cur = solidario.find().sort(sortFecha);
+        DBCursor cur = solidario.find().sort(sortFecha);
 
-		int i = 0;
-		while(cur.hasNext() && i < cur.length())
-		{
-			lista.add(cur.next().get("dni"));
-			
-		}
-                
-                return lista;
+        int i = 0;
+        while (cur.hasNext() && i < cur.length()) {
+            lista.add(cur.next().get("dni"));
+
+        }
+
+        return lista;
     }
 
 }

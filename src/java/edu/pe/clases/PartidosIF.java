@@ -1,5 +1,6 @@
 package edu.pe.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 import pe.edu.bean.PartidoBean;
 
@@ -8,7 +9,7 @@ public interface PartidosIF {
     
     public List<PartidoBean> normal();
     
-    public void crearPartido(PartidoBean pb);
+    public void crearPartido(PartidoBean pb, ArrayList jugadores);
     
     public List listarPartidos();
     

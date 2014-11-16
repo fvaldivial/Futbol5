@@ -63,7 +63,7 @@ public class PartInsServlet extends HttpServlet {
         
         boolean inscrito = false;
         
-//        AlgoIF a = new AlgoDAO();
+        PartidosIF a = new PartidosDAO();
 //        
 //        //aca debe ir el metodo del DAO que saque una lista con los usuarios inscritos para el partido
 //        List l = a.getUsuarios();
