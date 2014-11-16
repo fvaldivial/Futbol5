@@ -64,10 +64,10 @@ public class CrearPartServlet extends HttpServlet {
         p1.setAdmin(request.getParameter("usuario"));
         p1.setTurno(Integer.parseInt(request.getParameter("turnos")));
 
-       
-        ArrayList jug = new ArrayList();
-
-        //metele los jugadores aqui
+//       
+//        ArrayList jug = new ArrayList();
+//
+//        //metele los jugadores aqui
 
         
        
@@ -75,7 +75,7 @@ public class CrearPartServlet extends HttpServlet {
            
         
 
-        p.crearPartido(p1,jug);
+        p.crearPartido(p1);
 
         request.setAttribute("usuario", request.getParameter("usuario"));
         request.setAttribute("servlet", "algo");
